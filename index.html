@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uniting West Wisconsin — A Regional Response to Data Centers</title>
+  <meta name="description" content="A growing regional movement bringing together neighbors, communities, organizations and local leaders across Western Wisconsin." />
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:        #1a3a4a;
+      --teal-mid:    #1f4d61;
+      --teal-light:  #2a6480;
+      --sand:        #f5f0e8;
+      --sand-dark:   #ede6d6;
+      --orange:      #d4631a;   /* GROWW accent */
+      --green:       #4a7c44;   /* GROWW secondary accent */
+      --white:       #ffffff;
+      --text-dark:   #1a2530;
+      --text-mid:    #3d5263;
+      --radius:      10px;
+      --shadow:      0 4px 20px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--sand);
+      color: var(--text-dark);
+      line-height: 1.65;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--orange); text-decoration: underline; }
+    a:hover { color: var(--teal-light); }
+
+    /* ── Layout helpers ──────────────────────────────────────── */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section { padding: 3.5rem 0; }
+
+    /* ── Buttons ──────────────────────────────────────── */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-primary  { background: var(--orange); color: var(--white); }
+    .btn-secondary { background: transparent; color: var(--white); border: 2px solid var(--white); }
+    .btn-outline  { background: transparent; color: var(--teal); border: 2px solid var(--teal); }
+
+    /* ── Navigation ──────────────────────────────────────── */
+    nav {
+      background: var(--teal);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.7rem;
+      padding-bottom: 0.7rem;
+      gap: 1rem;
+    }
+    .nav-brand {
+      color: var(--sand);
+      font-weight: 800;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--sand);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      opacity: 0.85;
+      transition: opacity 0.15s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--sand); }
+
+    /* ── Hero ──────────────────────────────────────── */
+    #hero {
+      background: linear-gradient(160deg, var(--teal) 0%, var(--teal-mid) 60%, var(--teal-light) 100%);
+      color: var(--white);
+      padding: 4rem 0 3.5rem;
+      text-align: center;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .logo-placeholder {
+      background: rgba(255,255,255,0.12);
+      border: 2px dashed rgba(255,255,255,0.35);
+      border-radius: var(--radius);
+      padding: 1rem 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      min-width: 140px;
+    }
+    /* TODO: Replace .logo-placeholder divs with actual <img> tags once logos are provided */
+
+    #hero h1 {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+    #hero .subhead {
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      font-style: italic;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 2rem;
+    }
+    .hero-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--orange);
+      margin: 0 auto 1.8rem;
+      border-radius: 2px;
+    }
+    .movement-desc {
+      max-width: 640px;
+      margin: 0 auto 2.2rem;
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── About ──────────────────────────────────────── */
+    #about { background: var(--sand); }
+    #about h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .section-tag {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.75rem;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+    .about-body {
+      color: var(--text-mid);
+      font-size: 1.05rem;
+      max-width: 700px;
+    }
+    /* TODO: Replace .about-placeholder with actual body text from Carri */
+    .about-placeholder {
+      background: var(--sand-dark);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      color: var(--text-mid);
+      font-style: italic;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      max-width: 700px;
+    }
+
+    /* ── Events ──────────────────────────────────────── */
+    #events { background: var(--teal); }
+    #events h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    #events .section-tag { background: var(--orange); }
+    .events-intro {
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+    }
+
+    .event-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .event-card:last-child { margin-bottom: 0; }
+
+    .event-date-badge {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      margin-bottom: 0.85rem;
+    }
+    .event-card h3 {
+      font-size: clamp(1.15rem, 3vw, 1.5rem);
+      font-weight: 800;
+      color: var(--teal);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: 1.25rem;
+    }
+    .event-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+    }
+    .event-meta-row .icon {
+      flex-shrink: 0;
+      width: 1.1em;
+      margin-top: 0.15em;
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    /* TODO: Replace .event-photo-placeholder with <img> tag when Soren/Beau/Madilyn provide photos */
+    .event-photo-placeholder {
+      background: var(--sand-dark);
+      border: 2px dashed #c5b89a;
+      border-radius: var(--radius);
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9a8a70;
+      font-size: 0.82rem;
+      text-align: center;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .event-description {
+      font-size: 0.98rem;
+      color: var(--text-mid);
+      margin-bottom: 1.4rem;
+      line-height: 1.65;
+    }
+    .event-hosts {
+      font-size: 0.82rem;
+      color: #6d8496;
+      margin-bottom: 1.4rem;
+      font-style: italic;
+    }
+    .event-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .btn-event-primary  { background: var(--orange); color: var(--white); font-size: 0.95rem; }
+    .btn-event-secondary {
+      background: transparent;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+      font-size: 0.95rem;
+    }
+    .btn-event-secondary:hover { background: var(--teal); color: var(--white); }
+
+    .coming-soon-card {
+      background: rgba(255,255,255,0.07);
+      border: 2px dashed rgba(255,255,255,0.25);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      color: rgba(255,255,255,0.65);
+    }
+    .coming-soon-card h3 {
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .coming-soon-card p { font-size: 0.95rem; }
+    /* TODO: Replace coming-soon-card with full event card once Chautauqua date/time/location/description is provided */
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      background: var(--text-dark);
+      color: rgba(255,255,255,0.75);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+    footer .tagline {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--sand);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--orange); }
+    footer .contact {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 1rem;
+    }
+    footer .contact a { color: var(--orange); }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 600px) {
+      section { padding: 2.5rem 0; }
+      .nav-links { gap: 1rem; }
+      .hero-cta { flex-direction: column; align-items: center; }
+      .event-actions { flex-direction: column; }
+      .event-actions .btn { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav aria-label="Site navigation">
+    <div class="container">
+      <a href="#hero" class="nav-brand">Uniting West Wisconsin</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div class="container">
+
+      <!-- Logos -->
+      <div class="logo-row">
+        <!-- TODO: Replace this placeholder with <img src="glnu-logo.png" alt="Great Lakes Neighbors United logo" style="height:80px"> -->
+        <div class="logo-placeholder">
+          <strong>GLNU Logo</strong><br>
+          Great Lakes Neighbors United
+        </div>
+        <!-- TODO: Replace this placeholder with <img src="groww-logo.png" alt="GROWW logo" style="height:80px"> -->
+        <div class="logo-placeholder">
+          <strong>GROWW Logo</strong><br>
+          GROWW
+        </div>
+      </div>
+
+      <h1>Uniting West Wisconsin</h1>
+      <p class="subhead">A Regional Response to Data Centers</p>
+      <div class="hero-divider"></div>
+
+      <p class="movement-desc">
+        A growing regional movement bringing together neighbors, communities, organizations &amp; local leaders across the shared neighborhood of Western Wisconsin to help shape the future of the place we call home. We believe in transparency, public participation, and the power of neighbors working together.
+      </p>
+
+      <div class="hero-cta">
+        <a href="http://bit.ly/regionalresponse" class="btn btn-primary" target="_blank" rel="noopener">Register for June 13 Event</a>
+        <a href="#events" class="btn btn-secondary">See All Events</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="container">
+      <span class="section-tag">Our Mission</span>
+      <h2>Why We're Here</h2>
+
+      <!-- TODO: Replace the placeholder block below with the short rationale text Carri provides -->
+      <div class="about-placeholder">
+        <strong>// TODO:</strong> Carri will provide short rationale/body text for this section. Drop it in here as one or two paragraphs replacing this entire &lt;div class="about-placeholder"&gt; block.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Events ── -->
+  <section id="events">
+    <div class="container">
+      <span class="section-tag">Get Involved</span>
+      <h2>Join Us</h2>
+      <p class="events-intro">Come meet your neighbors. Hear from community leaders. Be part of shaping our region's future.</p>
+
+      <!-- Event 1 -->
+      <div class="event-card">
+        <div class="event-date-badge">Saturday, June 13, 2026</div>
+        <h3>Uniting West Wisconsin: A Regional Response to Data Centers</h3>
+
+        <!-- TODO: Drop in an event photo here once Soren / Beau / Madilyn provide images.
+             Suggested: <img src="event-june13.jpg" alt="Crowd gathered at High Country for Uniting West Wisconsin event">
+             Remove the .event-photo-placeholder div when the real image is added. -->
+        <div class="event-photo-placeholder">
+          📷 Event photo — to be provided by Soren / Beau / Madilyn
+        </div>
+
+        <div class="event-meta">
+          <div class="event-meta-row">
+            <span class="icon">📍</span>
+            <span>High Country, 5633 20th Ave, Eau Claire, WI 54703</span>
+          </div>
+          <div class="event-meta-row">
+            <span class="icon">🕔</span>
+            <span>Doors open 5 PM &mdash; Event starts 6 PM</span>
+          </div>
+          <div class="event-meta-row">
+            <span class="icon">🎟️</span>
+            <span><strong>Free to attend</strong> &mdash; Registration required</span>
+          </div>
+          <div class="event-meta-row">
+            <span class="icon">🎤</span>
+            <span>Featuring comedian <strong>Charlie Berens</strong></span>
+          </div>
+        </div>
+
+        <p class="event-description">
+          Join neighbors, community leaders, and organizations from across Western Wisconsin for an evening of connection, conversation, and community. Together we'll explore what data center development means for our region &mdash; and how we can shape that future together.
+        </p>
+
+        <p class="event-hosts">
+          Hosted by: Uniting West Wisconsin, Great Lakes Neighbors United, GROWW, and Chippewa Valley Indivisible
+        </p>
+
+        <div class="event-actions">
+          <a href="http://bit.ly/regionalresponse" class="btn btn-event-primary" target="_blank" rel="noopener">Register Now</a>
+          <!-- TODO: Insert Facebook event URL below once available. Replace # with the full FB event URL. -->
+          <a href="#" class="btn btn-event-secondary" target="_blank" rel="noopener">
+            <!-- TODO: FB event URL placeholder -->
+            View Facebook Event
+          </a>
+        </div>
+      </div>
+
+      <!-- Event 2 — Chautauqua -->
+      <!-- TODO: Replace this coming-soon-card with a full event-card once the Chautauqua
+           date, time, location, and description are provided. Use the Event 1 card above
+           as the template. -->
+      <div class="coming-soon-card">
+        <h3>The Chautauqua</h3>
+        <p>Details Coming Soon</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer id="footer">
+    <div class="container">
+      <p class="tagline">Connect to Protect.</p>
+
+      <div class="footer-links">
+        <a href="https://glnu.org" target="_blank" rel="noopener">Great Lakes Neighbors United</a>
+        <a href="https://groww.org" target="_blank" rel="noopener">GROWW</a>
+        <a href="mailto:UnitingWestWisconsin@gmail.com">Email Us</a>
+      </div>
+
+      <p class="contact">
+        Questions? Contact us at <a href="mailto:UnitingWestWisconsin@gmail.com">UnitingWestWisconsin@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
