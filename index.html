@@ -8,18 +8,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --teal:        #1a3a4a;
-      --teal-mid:    #1f4d61;
-      --teal-light:  #2a6480;
-      --sand:        #f5f0e8;
-      --sand-dark:   #ede6d6;
-      --orange:      #d4631a;
-      --green:       #4a7c44;
-      --white:       #ffffff;
-      --text-dark:   #1a2530;
-      --text-mid:    #3d5263;
-      --radius:      10px;
-      --shadow:      0 4px 20px rgba(0,0,0,0.12);
+      --teal: #1a3a4a; --teal-mid: #1f4d61; --teal-light: #2a6480;
+      --sand: #f5f0e8; --sand-dark: #ede6d6; --orange: #d4631a;
+      --white: #ffffff; --text-dark: #1a2530; --text-mid: #3d5263;
+      --radius: 10px; --shadow: 0 4px 20px rgba(0,0,0,0.12);
     }
     html { scroll-behavior: smooth; }
     body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--sand); color: var(--text-dark); line-height: 1.65; }
@@ -30,7 +22,7 @@
     section { padding: 3.5rem 0; }
     .btn { display: inline-block; padding: 0.75rem 1.6rem; border-radius: 6px; font-size: 1rem; font-weight: 700; text-decoration: none; cursor: pointer; transition: opacity 0.15s, transform 0.1s; }
     .btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-primary  { background: var(--orange); color: var(--white); }
+    .btn-primary { background: var(--orange); color: var(--white); }
     .btn-secondary { background: transparent; color: var(--white); border: 2px solid var(--white); }
     nav { background: var(--teal); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
     nav .container { display: flex; align-items: center; justify-content: space-between; padding-top: 0.7rem; padding-bottom: 0.7rem; gap: 1rem; }
@@ -63,7 +55,7 @@
     .event-description { font-size: 0.98rem; color: var(--text-mid); margin-bottom: 1.4rem; line-height: 1.65; }
     .event-hosts { font-size: 0.82rem; color: #6d8496; margin-bottom: 1.4rem; font-style: italic; }
     .event-actions { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
-    .btn-event-primary  { background: var(--orange); color: var(--white); font-size: 0.95rem; }
+    .btn-event-primary { background: var(--orange); color: var(--white); font-size: 0.95rem; }
     .btn-event-secondary { background: transparent; color: var(--teal); border: 2px solid var(--teal); font-size: 0.95rem; }
     .btn-event-secondary:hover { background: var(--teal); color: var(--white); }
     .entertainment-section { margin-top: 1.5rem; border-top: 2px solid var(--sand-dark); padding-top: 1.5rem; }
@@ -76,6 +68,12 @@
     .performer-name { color: var(--teal); font-size: 1rem; font-weight: 700; display: block; }
     .performer-title { color: var(--orange); font-size: 0.82rem; font-weight: 700; display: block; margin-top: 0.15rem; }
     .performer-bio { font-size: 0.88rem; color: var(--text-mid); margin-top: 0.3rem; line-height: 1.5; }
+    .popup-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
+    .popup-overlay.active { display: flex; }
+    .popup-box { background: var(--white); border-radius: var(--radius); padding: 2rem; max-width: 480px; width: 90%; text-align: center; position: relative; box-shadow: 0 8px 40px rgba(0,0,0,0.25); }
+    .popup-close { position: absolute; top: 0.75rem; right: 1rem; font-size: 1.4rem; background: none; border: none; cursor: pointer; color: var(--text-mid); line-height: 1; }
+    .popup-box h3 { color: var(--teal); font-size: 1.3rem; font-weight: 900; margin-bottom: 0.75rem; }
+    .popup-box p { color: var(--text-mid); font-size: 0.95rem; margin-bottom: 1.25rem; line-height: 1.6; }
     footer { background: var(--text-dark); color: rgba(255,255,255,0.75); padding: 2.5rem 0; text-align: center; }
     footer .tagline { font-style: italic; font-size: 1.1rem; color: var(--sand); margin-bottom: 1.2rem; font-weight: 600; }
     .footer-links { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
@@ -95,7 +93,6 @@
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav aria-label="Site navigation">
     <div class="container">
       <a href="#hero" class="nav-brand">Uniting West Wisconsin</a>
@@ -108,7 +105,6 @@
     </div>
   </nav>
 
-  <!-- Hero -->
   <section id="hero">
     <div class="container">
       <div class="logo-row">
@@ -126,7 +122,6 @@
     </div>
   </section>
 
-  <!-- About -->
   <section id="about">
     <div class="container">
       <span class="section-tag">Our Mission</span>
@@ -139,57 +134,49 @@
     </div>
   </section>
 
-  <!-- Events -->
   <section id="events">
     <div class="container">
       <span class="section-tag">Get Involved</span>
       <h2>Join Us</h2>
       <p class="events-intro">Come meet your neighbors. Hear from community leaders. Be part of shaping our region's future.</p>
 
-      <!-- Event 1 -->
       <div class="event-card">
         <div class="event-date-badge">Saturday, June 13, 2026</div>
         <h3>Uniting West Wisconsin: A Regional Response to Data Centers</h3>
-
         <img src="Uniting-West-Wisconsin.jpg" alt="Uniting West Wisconsin event flyer" style="width:100%; border-radius: 8px; margin-bottom: 1.25rem;">
-
         <div class="event-meta">
           <div class="event-meta-row">
-            <span class="icon">📍</span>
-            <a href="https://maps.app.goo.gl/9EjZxjMfEnqdRegz9" target="_blank" rel="noopener" style="color: var(--orange);">High Country at Eau Claire Event District, 5775 20th Ave, Eau Claire, WI 54703 ↗</a>
+            <span class="icon">&#128205;</span>
+            <a href="https://maps.app.goo.gl/9EjZxjMfEnqdRegz9" target="_blank" rel="noopener" style="color: var(--orange);">High Country at Eau Claire Event District, 5775 20th Ave, Eau Claire, WI 54703 &#8599;</a>
           </div>
           <div class="event-meta-row">
-            <span class="icon">🕔</span>
-            <span>Doors open 5 PM / Happy Hour &mdash; Event starts 6 PM</span>
+            <span class="icon">&#128340;</span>
+            <span>Doors open 5 PM / Happy Hour, Event starts 6 PM</span>
           </div>
           <div class="event-meta-row">
-            <span class="icon">🎟️</span>
-            <span><strong>Free to attend</strong> &mdash; Registration recommended, donation suggested</span>
+            <span class="icon">&#127903;</span>
+            <span><strong>Free to attend</strong>, Registration recommended, <a href="https://secure.ngpvan.com/x1cjs_9e20adkcu-ByfQOw2" target="_blank" rel="noopener" style="color: var(--orange);">donation suggested</a></span>
           </div>
           <div class="event-meta-row">
-            <span class="icon">🎤</span>
+            <span class="icon">&#127908;</span>
             <span>Featuring comedian <strong>Charlie Berens</strong></span>
           </div>
         </div>
-
-        <p class="event-description">Join neighbors, community leaders, and organizations from across Western Wisconsin for an evening of connection, conversation, and community. Together we'll explore what data center development means for our region &mdash; and how we can shape that future together.</p>
-
+        <p class="event-description">Join neighbors, community leaders, and organizations from across Western Wisconsin for an evening of connection, conversation, and community. Together we'll explore what data center development means for our region and how we can shape that future together.</p>
         <p class="event-hosts">Hosted by: Uniting West Wisconsin, Great Lakes Neighbors United, GROWW, and Chippewa Valley Indivisible</p>
 
-        <!-- Featured Performer -->
         <div class="entertainment-section">
           <h4>Featured Performer</h4>
           <div class="performer-row">
             <img src="charlieberens.png" alt="Charlie Berens" class="performer-photo">
             <div class="performer-info">
-              <a href="https://www.charlieberens.com" target="_blank" rel="noopener" class="performer-name" style="text-decoration: none;">Charlie Berens ↗</a>
+              <a href="https://www.charlieberens.com/" target="_blank" rel="noopener" class="performer-name" style="text-decoration: none;">Charlie Berens &#8599;</a>
               <span class="performer-title">Comedian &amp; Author, Manitowoc Minute</span>
               <p class="performer-bio">Charlie Berens is a comedian, New York Times Best Selling Author, Emmy-winning journalist, and host of "The Manitowoc Minute."</p>
             </div>
           </div>
         </div>
 
-        <!-- Featured Music -->
         <div class="entertainment-section">
           <h4>Featured Music</h4>
           <div class="performer-row">
@@ -209,26 +196,13 @@
           </div>
         </div>
 
-        <!-- Comedy -->
-        <div class="entertainment-section">
-          <h4>Comedy &mdash; <a href="https://www.facebook.com/clearwatercomedy/" target="_blank" rel="noopener" style="color: var(--orange); font-size: 0.9rem; text-transform: none; font-weight: 700;">Clearwater Comedy</a></h4>
-          <div class="performer-row">
-            <div class="performer-photo-placeholder">📷 Photo coming</div>
-            <div class="performer-info">
-              <span class="performer-name">Comedian</span>
-              <p class="performer-bio" style="font-style:italic;">Details coming soon.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Food Trucks -->
         <div class="entertainment-section">
           <h4>Food Trucks</h4>
           <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.5rem;">
-            <a href="https://www.facebook.com/TastyTrolleyFoodTruck/" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Tasty Trolley ↗</a>
-            <a href="https://www.facebook.com/livegreatfood" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Live Great Food ↗</a>
-            <a href="https://www.facebook.com/profile.php?id=61580854419276" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Onyx Oven ↗</a>
-            <a href="https://www.facebook.com/profile.php?id=61578732792115" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Potato Potahto ↗</a>
+            <a href="https://www.facebook.com/TastyTrolleyFoodTruck/" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Tasty Trolley &#8599;</a>
+            <a href="https://www.facebook.com/livegreatfood" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Live Great Food &#8599;</a>
+            <a href="https://www.facebook.com/profile.php?id=61580854419276" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Onyx Oven &#8599;</a>
+            <a href="https://www.facebook.com/profile.php?id=61578732792115" target="_blank" rel="noopener" style="background: var(--sand-dark); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.9rem; color: var(--text-mid); font-weight: 600; text-decoration: none;">Potato Potahto &#8599;</a>
           </div>
         </div>
 
@@ -238,16 +212,44 @@
         </div>
       </div>
 
-      <!-- Event 2 — Chautauqua -->
       <div class="event-card">
         <div class="event-date-badge">Sunday, June 14, 2026</div>
         <div style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
-          <img src="KnappaValleyVenue.jpg" alt="Knappa Valley" style="width: 220px; border-radius: 8px; flex-shrink: 0;">
+          <img src="KnappaValleyVenue.jpg" alt="Knappa Valley Venue" style="width: 220px; border-radius: 8px; flex-shrink: 0;">
           <div style="flex: 1; min-width: 200px;">
             <h3>The West Wisconsin Neighborhood Chautauqua</h3>
-            <p class="event-description">The West Wisconsin Neighborhood Chautauqua is a regional gathering focused on sharing perspectives, learning from one another, and exploring what meaningful collaboration between western Wisconsin communities could look like moving forward.</p>
-            <p class="event-description">Through resident panels, guided cross-county discussions, shared meals, music, and community conversation, this neighborly civic gathering is designed to help communities identify practical paths for regional cooperation while remaining rooted in the values and qualities of life that define western Wisconsin.</p>
-            <p style="font-style: italic; color: var(--text-mid); font-size: 0.95rem; margin-top: 0.75rem;">📍 <a href="https://www.google.com/maps/place/Knappa+Valley+Venue/@44.9535096,-92.1275393,17z/data=!3m1!4b1!4m6!3m5!1s0x87f8759e5c78b037:0x5b9c18f6b59e003d!8m2!3d44.9535096!4d-92.1275393!16s%2Fg%2F11kj128jwf" target="_blank" rel="noopener">Knappa Valley ↗ Map</a> &nbsp;|&nbsp; <a href="https://www.knappavalley.com" target="_blank" rel="noopener">knappavalley.com</a> &nbsp;|&nbsp; Arrive 12 PM for Food &amp; Fellowship &mdash; Neighborhood Chautauqua 1 PM&ndash;4 PM</p>
+            <p class="event-description">Western Wisconsin is at a crossroads. As proposals for hyperscale data centers move into communities across the region, residents and local officials are wrestling with big questions about land use, water, energy, and who gets a voice in decisions that will shape their towns for generations.</p>
+            <p class="event-description">The West Wisconsin Neighborhood Chautauqua is a gathering for neighbors who believe those decisions should be made together. Through conversation, shared meals, music, and community storytelling, we'll explore what regional cooperation could look like and how western Wisconsin communities can face these challenges not in isolation, but as connected neighbors with a shared future.</p>
+            <p style="font-style: italic; color: var(--text-mid); font-size: 0.95rem; margin-top: 0.75rem;">&#128205; <a href="https://www.google.com/maps/place/Knappa+Valley+Venue/@44.9535096,-92.1275393,17z" target="_blank" rel="noopener">Knappa Valley Map &#8599;</a> &nbsp;|&nbsp; <a href="https://www.knappavalley.com" target="_blank" rel="noopener">knappavalley.com</a> &nbsp;|&nbsp; Arrive 12 PM for Food &amp; Fellowship, Neighborhood Chautauqua 1 PM to 4 PM</p>
+
+            <div class="entertainment-section">
+              <h4>Featured Performers</h4>
+              <div class="performer-row">
+                <img src="D_Janakey.jpeg" alt="D. Janakey" class="performer-photo">
+                <div class="performer-info">
+                  <span class="performer-name">D. Janakey</span>
+                  <span class="performer-title">Folk Musician</span>
+                  <p class="performer-bio">An Eau Claire, Wisconsin-based folk musician and world traveler. Known for his raw, authentic, and acoustic storytelling, he performs intimate singer-songwriter sets frequently featured at midwestern venues.</p>
+                </div>
+              </div>
+              <div class="performer-row">
+                <img src="L_Buchholz.png" alt="Laura Buchholz" class="performer-photo">
+                <div class="performer-info">
+                  <span class="performer-name">Laura Buchholz</span>
+                  <span class="performer-title">Writer &amp; Improvisor</span>
+                  <p class="performer-bio">A writer, improvisor, hula hooper, and dog enthusiast. She wrote for A Prairie Home Companion with Garrison Keillor and has written shows at the Minnesota and New York International Fringe Festivals. Trained at the Upright Citizens Brigade Theater in New York City.</p>
+                </div>
+              </div>
+              <div class="performer-row">
+                <img src="K_Szymanski.jpeg" alt="Ken Szymanski" class="performer-photo">
+                <div class="performer-info">
+                  <span class="performer-name">Ken Szymanski</span>
+                  <span class="performer-title">Writer &amp; Teacher</span>
+                  <p class="performer-bio">The 2020 to 2026 Eau Claire Writer in Residence and an English teacher at DeLong Middle School. Author of "Summertime Souvenirs," "Home Field Advantage," and "Sit Down and Stay Awhile: My Aunt Lil, a Small-Town Bar, and a Lifetime of Polkas."</p>
+                </div>
+              </div>
+            </div>
+
             <div class="event-actions">
               <a href="https://secure.ngpvan.com/cS03OweooUupC8tV7Po17g2" class="btn btn-event-primary" target="_blank" rel="noopener">Register Now</a>
             </div>
@@ -258,7 +260,6 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer id="footer">
     <div class="container">
       <p class="tagline">Connect to Protect.</p>
@@ -270,6 +271,26 @@
       <p class="contact">Questions? Contact us at <a href="mailto:UnitingWestWisconsin@gmail.com">UnitingWestWisconsin@gmail.com</a></p>
     </div>
   </footer>
+
+  <div class="popup-overlay" id="petitionPopup">
+    <div class="popup-box">
+      <button class="popup-close" onclick="document.getElementById('petitionPopup').classList.remove('active')">&times;</button>
+      <h3>Sign Our Petition</h3>
+      <p>Add your voice to the growing movement of western Wisconsin neighbors calling for transparency, accountability, and a say in our region's future.</p>
+      <a href="https://secure.ngpvan.com/gMYeWUJfOEe19Rgo2Lm8cA2" target="_blank" rel="noopener" class="btn btn-primary" style="width:100%; text-align:center; display:block;">Sign the Petition</a>
+    </div>
+  </div>
+  <script>
+    if (!sessionStorage.getItem('petitionShown')) {
+      setTimeout(function() {
+        document.getElementById('petitionPopup').classList.add('active');
+        sessionStorage.setItem('petitionShown', '1');
+      }, 5000);
+    }
+    document.getElementById('petitionPopup').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('active');
+    });
+  </script>
 
 </body>
 </html>
